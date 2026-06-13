@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirza Zeeshan Baig - Professional Resume & Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            400: '#38bdf8', // Light blue
+                            500: '#0ea5e9', // Primary blue
+                            600: '#0284c7', // Darker blue
+                        },
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism & Tint Effect for Cards */
+        .glass-tint {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s ease;
+        }
+        
+        /* Hover lift and glow for tiles */
+        .glass-tint:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 0 15px rgba(56, 189, 248, 0.1);
+        }
+
+        /* Hover effect for inner buttons/links */
+        .btn-hover-effect {
+            transition: all 0.3s ease;
+        }
+        .btn-hover-effect:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background-color: rgba(30, 41, 59, 0.9);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #38bdf8, #818cf8);
+        }
+
+        /* Custom Scrollbar for the wheel */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Image Gallery Styles */
+        .gallery-image {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: brightness(0.8);
+            flex-shrink: 0;
+            border: 2px solid transparent;
+        }
+        .gallery-image:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+            border-color: #38bdf8;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        /* Lightbox (Full Screen Image) */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        #lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            border: 2px solid #334155;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Hero Section -->
+    <header class="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden border-b border-dark-border/50">
+        <!-- Background Accents -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left flex flex-col md:flex-row items-center gap-12">
+            
+            <!-- Profile Info & Image Wrapper -->
+            <div class="flex-1 flex flex-col md:flex-row items-center md:items-start gap-8">
+                
+                <!-- Profile Image -->
+                <div class="flex-shrink-0 relative group mt-2">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-400 to-indigo-500 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <img src="profile.jpg" onerror="this.src='https://placehold.co/400x400/1e293b/38bdf8?text=Mirza+Zeeshan+Baig'" alt="Mirza Zeeshan Baig" class="relative w-48 h-48 md:w-56 md:h-56 object-cover rounded-full border-4 border-dark-card shadow-2xl transition-transform duration-300 group-hover:scale-105">
+                </div>
+
+                <!-- Profile Info -->
+                <div class="flex-1">
+                    
+                    <!-- GOLD MEDALIST NEON GLOW BADGE -->
+                    <div class="relative inline-flex items-center justify-center mb-6">
+                        <!-- Neon Glow Background -->
+                        <div class="absolute inset-0 bg-yellow-400 blur-md opacity-40 rounded-full animate-pulse"></div>
+                        <!-- Badge Content -->
+                        <div class="relative px-5 py-2 rounded-full bg-yellow-900/50 border-2 border-yellow-400/80 text-yellow-300 font-bold text-sm shadow-[0_0_20px_rgba(250,204,21,0.5)] tracking-wide">
+                            <i class="fas fa-medal mr-2 text-yellow-400"></i> Gold Medalist & Top Performer
+                        </div>
+                    </div>
+
+                    <h1 class="text-4xl md:text-6xl font-heading font-extrabold text-white mb-4 tracking-tight">
+                        Mirza Zeeshan <span class="text-gradient">Baig</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-slate-300 font-medium mb-6">
+                        Head of Sales & Marketing | Business Development Leader
+                    </p>
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-slate-400 mb-8">
+                        <span class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-brand-500"></i> Lahore, Pakistan</span>
+                        <span class="flex items-center gap-2"><i class="fas fa-phone text-brand-500"></i> +92-345-4645815</span>
+                        <span class="flex items-center gap-2"><i class="fas fa-envelope text-brand-500"></i> zeeshanbaig9459@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Links / Summary -->
+            <div class="w-full md:w-1/3 glass-tint rounded-3xl p-6 text-left">
+                <h3 class="text-lg font-bold text-white mb-3 font-heading border-b border-dark-border pb-2">Professional Objective</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    To groom my technical, managerial and interpersonal abilities by working in a professional and challenging environment that realize my complete potential. Passionate about driving growth and establishing strong brands.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- TVC's, Media Ads & Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-dark-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-brand-400 font-semibold tracking-wide uppercase text-sm mb-2">Showcase</p>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white">TVC’s, Media Ads & Portfolio</h2>
+                <div class="w-24 h-1 bg-brand-500 mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="space-y-8 mb-16 reveal">
+                
+                <!-- 1: KFC Pakistan -->
+                <div class="glass-tint p-6 md:p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 opacity-5 text-6xl font-black italic text-red-500">01</div>
+                    <h3 class="text-2xl font-bold text-red-500 mb-6 flex items-center gap-3 border-b border-dark-border pb-4 relative z-10">
+                        <i class="fas fa-drumstick-bite"></i> 1: KFC Pakistan
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+                        <a href="https://www.youtube.com/watch?v=GAvG5vMql-4" target="_blank" class="block bg-dark-bg/50 border border-dark-border p-4 rounded-xl btn-hover-effect hover:border-red-500/50">
+                            <p class="text-white font-medium mb-1"><i class="fab fa-youtube text-red-500 mr-2 text-lg"></i>Big Filler Launch</p>
+                            <p class="text-xs text-slate-400 leading-relaxed">Project collaboration with PakHR Karachi Clifton.</p>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=r4u24s8EAiA" target="_blank" class="block bg-dark-bg/50 border border-dark-border p-4 rounded-xl btn-hover-effect hover:border-red-500/50">
+                            <p class="text-white font-medium mb-1"><i class="fab fa-youtube text-red-500 mr-2 text-lg"></i>Ufone and KFC Pakistan</p>
+                            <p class="text-xs text-slate-400 leading-relaxed">Verge 360 Project. In Collaboration with Shoaib’s Agency.</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2: Novo Nordisk -->
+                <div class="glass-tint p-6 md:p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 opacity-5 text-6xl font-black italic text-blue-500">02</div>
+                    <h3 class="text-2xl font-bold text-blue-500 mb-6 flex items-center gap-3 border-b border-dark-border pb-4 relative z-10">
+                        <i class="fas fa-prescription-bottle-medical"></i> 2: Novo Nordisk
+                    </h3>
+                    <div class="space-y-4 relative z-10">
+                        <a href="https://www.youtube.com/watch?v=YIDHrgZSEtg" target="_blank" class="block bg-dark-bg/50 border border-dark-border p-5 rounded-xl btn-hover-effect hover:border-blue-500/50">
+                            <p class="text-white font-medium mb-2 text-lg"><i class="fab fa-youtube text-red-500 mr-2"></i>A. Waseem Akram. Diabetes ka Sultan.</p>
+                            <p class="text-xs text-slate-400 leading-relaxed italic border-l-2 border-blue-500/30 pl-3">
+                                Id Creations: Director: Hamza Imam | Producer: Nida Aslam | Client: Novo Nordisk | Production House: illusion makers | DOP (Karachi): Shahzad Khan | DOP (Lahore): Shah Zaman Baloch | Executive Producer: Erum Kizilbash.
+                            </p>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=s2nLL7mJ_kQ" target="_blank" class="block bg-dark-bg/50 border border-dark-border p-5 rounded-xl btn-hover-effect hover:border-blue-500/50">
+                            <p class="text-white font-medium mb-2 text-lg"><i class="fab fa-youtube text-red-500 mr-2"></i>B. Tabdeeli Ak Bar Faida Bar Bar</p>
+                            <p class="text-xs text-slate-400 leading-relaxed italic border-l-2 border-blue-500/30 pl-3">
+                                E5 Advertising. Novo Nordisk TV Ad Pakistan conceived, written and directed by E5 Advertising (honk@e5ve.com, bushra@e5ve.com).
+                            </p>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=HYi_f-dKLm0" target="_blank" class="block bg-dark-bg/50 border border-dark-border p-5 rounded-xl btn-hover-effect hover:border-blue-500/50">
+                            <p class="text-white font-medium mb-2 text-lg"><i class="fab fa-youtube text-red-500 mr-2"></i>C. Zeba Bakhtiyar NP 3 TVC.</p>
+                            <p class="text-xs text-slate-400 leading-relaxed italic border-l-2 border-blue-500/30 pl-3">
+                                E5 Advertising. Novo Nordisk TV Ad Pakistan conceived, written and directed by E5 Advertising.
+                            </p>
+                        </a>
+                        <div class="mt-4 p-4 bg-blue-900/10 border border-blue-500/20 rounded-xl flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <p class="text-sm text-slate-300 font-medium">UMEED Programme. Sheraton Karachi <span class="text-slate-500">| Dr Muzna KOL Hosting Workshop</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3: Merck Sharp & Dhome -->
+                <div class="glass-tint p-6 md:p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 opacity-5 text-6xl font-black italic text-teal-500">03</div>
+                    <h3 class="text-2xl font-bold text-teal-500 mb-6 flex items-center gap-3 border-b border-dark-border pb-4 relative z-10">
+                        <i class="fas fa-heartbeat"></i> 3: Merck Sharp & Dhome
+                    </h3>
+                    <div class="relative z-10">
+                        <a href="https://www.youtube.com/watch?v=elecqeISQJU" target="_blank" class="block bg-dark-bg/50 border border-dark-border p-4 rounded-xl btn-hover-effect hover:border-teal-500/50 mb-4">
+                            <p class="text-white font-medium mb-1"><i class="fab fa-youtube text-red-500 mr-2 text-lg"></i>Merck Reaching You Out</p>
+                            <p class="text-xs text-slate-400 leading-relaxed">For a Better Quality of Life.</p>
+                        </a>
+                        <p class="text-sm text-brand-400 italic flex items-center gap-2"><i class="fas fa-info-circle"></i> Rest Of full Portfolio available in Print Form and Visuals.</p>
+                    </div>
+                </div>
+
+                <!-- 4: JoyLand Group -->
+                <div class="glass-tint p-6 md:p-8 rounded-3xl relative overflow-hidden group border-2 border-purple-500/30">
+                    <div class="absolute top-0 right-0 p-6 opacity-5 text-6xl font-black italic text-purple-500">04</div>
+                    <h3 class="text-2xl font-bold text-purple-500 mb-3 flex items-center gap-3 border-b border-dark-border pb-4 relative z-10">
+                        <i class="fas fa-ticket-alt"></i> 4: JoyLand Group
+                    </h3>
+                    <p class="text-sm text-slate-300 mb-6 relative z-10 font-medium">Fortress Stadium & Emporium Mall.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
+                        <a href="https://www.youtube.com/watch?v=ZEsqNf4lSVg" target="_blank" class="bg-dark-bg/50 border border-dark-border p-4 rounded-xl flex flex-col justify-center gap-2 btn-hover-effect hover:border-purple-500/50">
+                            <div class="flex items-center gap-3">
+                                <i class="fab fa-youtube text-2xl text-red-500"></i>
+                                <p class="text-white text-sm font-medium">Kalma Chowk Intro</p>
+                            </div>
+                            <p class="text-[11px] text-slate-500 ml-9">www.facebook.com/yasadverts | www.yasadverts.com</p>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=s6Bpn5vWtcA" target="_blank" class="bg-dark-bg/50 border border-dark-border p-4 rounded-xl flex items-center gap-3 btn-hover-effect hover:border-purple-500/50">
+                            <i class="fab fa-youtube text-2xl text-red-500"></i>
+                            <p class="text-white text-sm font-medium">Bounce Official Intro</p>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=WGwCPwpOVe0" target="_blank" class="bg-dark-bg/50 border border-dark-border p-4 rounded-xl flex items-center gap-3 btn-hover-effect hover:border-purple-500/50">
+                            <i class="fab fa-youtube text-2xl text-red-500"></i>
+                            <p class="text-white text-sm font-medium">Bounce Haunted Dungeons Intro</p>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=bm-S3cMv_-I" target="_blank" class="bg-dark-bg/50 border border-dark-border p-4 rounded-xl flex items-center gap-3 btn-hover-effect hover:border-purple-500/50">
+                            <i class="fab fa-youtube text-2xl text-red-500"></i>
+                            <p class="text-white text-sm font-medium">Bounce Packages</p>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=qSvhEK7Xk8Y" target="_blank" class="bg-dark-bg/50 border border-dark-border p-4 rounded-xl flex flex-col justify-center gap-1 btn-hover-effect hover:border-purple-500/50">
+                            <div class="flex items-center gap-3">
+                                <i class="fab fa-youtube text-2xl text-red-500"></i>
+                                <p class="text-white text-sm font-medium">Tech Surge</p>
+                            </div>
+                            <p class="text-[11px] text-slate-500 ml-9">Verge 360 Project.</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5: Professional Group of Companies -->
+                <div class="glass-tint p-6 md:p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 opacity-5 text-6xl font-black italic text-yellow-500">05</div>
+                    <h3 class="text-2xl font-bold text-yellow-500 mb-6 flex items-center gap-3 border-b border-dark-border pb-4 relative z-10">
+                        <i class="fas fa-building"></i> 5: Professional Group of Companies
+                    </h3>
+                    <div class="flex flex-wrap gap-3 relative z-10">
+                        <span class="px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 text-yellow-300 rounded-lg text-sm font-medium hover:bg-yellow-500/20 transition-colors cursor-default">Renewable Energies Sector</span>
+                        <span class="px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 text-yellow-300 rounded-lg text-sm font-medium hover:bg-yellow-500/20 transition-colors cursor-default">Electric Vehicles</span>
+                        <span class="px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 text-yellow-300 rounded-lg text-sm font-medium hover:bg-yellow-500/20 transition-colors cursor-default">Pick Up Truck Segment</span>
+                        <span class="px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 text-yellow-300 rounded-lg text-sm font-medium hover:bg-yellow-500/20 transition-colors cursor-default">Shell Lubricants Division</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Gallery Section with Auto-Scroll Wheel -->
+            <div class="glass-tint p-6 rounded-3xl reveal border border-dark-border relative group"
+                 onmouseenter="pauseWheel()" 
+                 onmouseleave="resumeWheel()"
+                 ontouchstart="pauseWheel()"
+                 ontouchend="resumeWheel()">
+                
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-dark-border pb-4">
+                    <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <i class="fas fa-images text-brand-400"></i> Event Gallery
+                    </h3>
+                    
+                    <!-- Controls -->
+                    <div class="flex gap-3 w-full sm:w-auto justify-end">
+                        <button onclick="scrollGallery(-1)" class="w-10 h-10 rounded-full bg-dark-bg border border-dark-border text-slate-300 hover:text-brand-400 hover:border-brand-400 transition-colors flex justify-center items-center flex-shrink-0">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button onclick="scrollGallery(1)" class="w-10 h-10 rounded-full bg-dark-bg border border-dark-border text-slate-300 hover:text-brand-400 hover:border-brand-400 transition-colors flex justify-center items-center flex-shrink-0">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button id="toggleViewBtn" onclick="toggleGalleryView()" class="px-4 h-10 rounded-full bg-brand-500/20 border border-brand-500/50 text-brand-400 hover:bg-brand-500 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium ml-2 flex-shrink-0">
+                            <i class="fas fa-th"></i> View All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hover Overlay Indicator -->
+                <div id="pause-indicator" class="absolute top-4 right-1/2 translate-x-1/2 px-3 py-1 bg-black/60 rounded-full text-xs text-white opacity-0 transition-opacity duration-300 pointer-events-none">
+                    <i class="fas fa-pause mr-1"></i> Paused
+                </div>
+
+                <!-- Gallery Container -->
+                <div id="gallery-container" class="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 no-scrollbar scroll-smooth"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Skills & Tools Section -->
+    <section class="py-16 border-t border-dark-border/50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-white mb-10 text-center reveal">Digital Platforms & Specific Skill Set</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                <!-- Skill Card 1: ERP & CRM -->
+                <div class="glass-tint p-6 rounded-2xl flex flex-col h-full">
+                    <div class="w-12 h-12 bg-indigo-500/20 text-indigo-400 rounded-xl flex items-center justify-center mb-5 text-xl shadow-inner">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-4 text-lg border-b border-dark-border pb-2">ERP & CRM</h4>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1.5 bg-indigo-900/40 border border-indigo-500/30 rounded-md text-indigo-300 text-sm font-medium hover:bg-indigo-500/20 transition-colors cursor-default">SAP</span>
+                        <span class="px-3 py-1.5 bg-indigo-900/40 border border-indigo-500/30 rounded-md text-indigo-300 text-sm font-medium hover:bg-indigo-500/20 transition-colors cursor-default">Odoo</span>
+                        <span class="px-3 py-1.5 bg-indigo-900/40 border border-indigo-500/30 rounded-md text-indigo-300 text-sm font-medium hover:bg-indigo-500/20 transition-colors cursor-default">Salesforce</span>
+                        <span class="px-3 py-1.5 bg-indigo-900/40 border border-indigo-500/30 rounded-md text-indigo-300 text-sm font-medium hover:bg-indigo-500/20 transition-colors cursor-default">HubSpot</span>
+                        <span class="px-3 py-1.5 bg-indigo-900/40 border border-indigo-500/30 rounded-md text-indigo-300 text-sm font-medium hover:bg-indigo-500/20 transition-colors cursor-default">Zoho Server</span>
+                        <span class="px-3 py-1.5 bg-indigo-900/40 border border-indigo-500/30 rounded-md text-indigo-300 text-sm font-medium hover:bg-indigo-500/20 transition-colors cursor-default">Pryvyr</span>
+                    </div>
+                </div>
+                
+                <!-- Skill Card 2: Project Management -->
+                <div class="glass-tint p-6 rounded-2xl flex flex-col h-full">
+                    <div class="w-12 h-12 bg-brand-500/20 text-brand-400 rounded-xl flex items-center justify-center mb-5 text-xl shadow-inner">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-4 text-lg border-b border-dark-border pb-2">Project Management</h4>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1.5 bg-brand-900/40 border border-brand-500/30 rounded-md text-brand-300 text-sm font-medium hover:bg-brand-500/20 transition-colors cursor-default">Jira</span>
+                        <span class="px-3 py-1.5 bg-brand-900/40 border border-brand-500/30 rounded-md text-brand-300 text-sm font-medium hover:bg-brand-500/20 transition-colors cursor-default">Bitrix 24</span>
+                        <span class="px-3 py-1.5 bg-brand-900/40 border border-brand-500/30 rounded-md text-brand-300 text-sm font-medium hover:bg-brand-500/20 transition-colors cursor-default">Agile</span>
+                        <span class="px-3 py-1.5 bg-brand-900/40 border border-brand-500/30 rounded-md text-brand-300 text-sm font-medium hover:bg-brand-500/20 transition-colors cursor-default">Scrum</span>
+                        <span class="px-3 py-1.5 bg-brand-900/40 border border-brand-500/30 rounded-md text-brand-300 text-sm font-medium hover:bg-brand-500/20 transition-colors cursor-default">Kanban</span>
+                        <span class="px-3 py-1.5 bg-brand-900/40 border border-brand-500/30 rounded-md text-brand-300 text-sm font-medium hover:bg-brand-500/20 transition-colors cursor-default">Waterfall</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3: Digital Marketing -->
+                <div class="glass-tint p-6 rounded-2xl flex flex-col h-full">
+                    <div class="w-12 h-12 bg-green-500/20 text-green-400 rounded-xl flex items-center justify-center mb-5 text-xl shadow-inner">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-4 text-lg border-b border-dark-border pb-2">Digital Marketing</h4>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1.5 bg-green-900/40 border border-green-500/30 rounded-md text-green-300 text-sm font-medium hover:bg-green-500/20 transition-colors cursor-default">Google Ads</span>
+                        <span class="px-3 py-1.5 bg-green-900/40 border border-green-500/30 rounded-md text-green-300 text-sm font-medium hover:bg-green-500/20 transition-colors cursor-default">Meta Ads</span>
+                        <span class="px-3 py-1.5 bg-green-900/40 border border-green-500/30 rounded-md text-green-300 text-sm font-medium hover:bg-green-500/20 transition-colors cursor-default">LinkedIn Sales Nav</span>
+                        <span class="px-3 py-1.5 bg-green-900/40 border border-green-500/30 rounded-md text-green-300 text-sm font-medium hover:bg-green-500/20 transition-colors cursor-default">Mail Chimp</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 4: Operations -->
+                <div class="glass-tint p-6 rounded-2xl flex flex-col h-full">
+                    <div class="w-12 h-12 bg-orange-500/20 text-orange-400 rounded-xl flex items-center justify-center mb-5 text-xl shadow-inner">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-4 text-lg border-b border-dark-border pb-2">Operations</h4>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1.5 bg-orange-900/40 border border-orange-500/30 rounded-md text-orange-300 text-sm font-medium hover:bg-orange-500/20 transition-colors cursor-default">Inventory Mgt.</span>
+                        <span class="px-3 py-1.5 bg-orange-900/40 border border-orange-500/30 rounded-md text-orange-300 text-sm font-medium hover:bg-orange-500/20 transition-colors cursor-default">POS</span>
+                        <span class="px-3 py-1.5 bg-orange-900/40 border border-orange-500/30 rounded-md text-orange-300 text-sm font-medium hover:bg-orange-500/20 transition-colors cursor-default">Attendance Mgt.</span>
+                        <span class="px-3 py-1.5 bg-orange-900/40 border border-orange-500/30 rounded-md text-orange-300 text-sm font-medium hover:bg-orange-500/20 transition-colors cursor-default">G-Suit</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Closing -->
+    <footer class="py-8 text-center border-t border-dark-border/50 bg-dark-bg mt-12 relative z-10">
+        <div class="flex justify-center space-x-6 mb-4">
+            <a href="https://www.linkedin.com/in/mirza-zeeshan-baig-5a7b41106" target="_blank" class="text-slate-400 hover:text-brand-400 text-xl transition-colors"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:zeeshanbaig9459@gmail.com" class="text-slate-400 hover:text-brand-400 text-xl transition-colors"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/923454645815" class="text-slate-400 hover:text-brand-400 text-xl transition-colors"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p class="text-slate-500 text-sm">© 2026 Mirza Zeeshan Baig. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Lightbox Element -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="absolute top-6 right-8 text-white text-4xl cursor-pointer hover:text-brand-400">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Screen">
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // ==========================================
+        // Scroll Animation Observer
+        // ==========================================
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        };
+        const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ==========================================
+        // Lightbox Logic
+        // ==========================================
+        function openLightbox(imgSrc) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto'; // Resume scrolling
+        }
+
+        // ==========================================
+        // Gallery Slider & "Wheel" Logic
+        // ==========================================
+        let autoScrollInterval;
+        let isHovered = false;
+        const container = document.getElementById('gallery-container');
+        const indicator = document.getElementById('pause-indicator');
+
+        const whatsappGalleryFiles = [
+            "WhatsApp Image 2026-06-07 at 11.30.26 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.27 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.27 AM (2).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.27 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.28 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.28 AM (2).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.28 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.29 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.29 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.30 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.30 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.31 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.33 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.33 AM (2).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.33 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.35 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.36 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.36 AM (2).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.36 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.37 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.38 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.38 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.39 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.39 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.40 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.40 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.41 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.41 AM (2).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.41 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.42 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.42 AM.jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.43 AM (1).jpeg",
+            "WhatsApp Image 2026-06-07 at 11.30.43 AM.jpeg"
+        ];
+
+        function renderGalleryImages() {
+            container.innerHTML = '';
+            whatsappGalleryFiles.forEach((fileName, index) => {
+                const img = document.createElement('img');
+                img.src = encodeURI(fileName);
+                img.alt = `Event Photo ${index + 1}`;
+                img.className = 'gallery-image snap-center';
+                img.onclick = () => openLightbox(img.src);
+                img.onerror = () => {
+                    img.src = 'https://placehold.co/300x200/1e293b/38bdf8?text=Missing+Image';
+                };
+                container.appendChild(img);
+            });
+        }
+
+        renderGalleryImages();
+
+        // Stronger Hover Control
+        function pauseWheel() {
+            isHovered = true;
+            if(container.classList.contains('flex')) {
+                indicator.style.opacity = '1';
+            }
+        }
+        
+        function resumeWheel() {
+            isHovered = false;
+            indicator.style.opacity = '0';
+        }
+
+        // Initialize Auto Scroll
+        startAutoScroll();
+
+        function startAutoScroll() {
+            clearInterval(autoScrollInterval);
+            // Slower speed: 3.5 seconds
+            autoScrollInterval = setInterval(() => {
+                if(container.classList.contains('grid') || isHovered) return;
+                scrollGallery(1);
+            }, 3500); 
+        }
+
+        function scrollGallery(direction) {
+            const scrollAmount = container.clientWidth;
+            
+            // Auto rewind if reaching the end
+            if(direction === 1 && (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10)) {
+                container.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // ==========================================
+        // Toggle Gallery View (Slider vs Grid)
+        // ==========================================
+        function toggleGalleryView() {
+            const btn = document.getElementById('toggleViewBtn');
+            const images = document.querySelectorAll('.gallery-image');
+            
+            if (container.classList.contains('flex')) {
+                // Switch to Grid View
+                clearInterval(autoScrollInterval); // Completely stop timer in grid mode
+                indicator.style.opacity = '0'; // Hide indicator in grid view
+                
+                container.classList.remove('flex', 'overflow-x-auto', 'snap-x', 'snap-mandatory', 'no-scrollbar', 'pb-4');
+                container.classList.add('grid', 'grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+                images.forEach(img => {
+                    img.style.width = '100%';
+                    img.style.height = '150px';
+                });
+                btn.innerHTML = '<i class="fas fa-sliders-h"></i> View Slider';
+                btn.classList.add('bg-brand-500', 'text-white');
+            } else {
+                // Switch to Slider View
+                container.classList.add('flex', 'overflow-x-auto', 'snap-x', 'snap-mandatory', 'no-scrollbar', 'pb-4');
+                container.classList.remove('grid', 'grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+                images.forEach(img => {
+                    img.style.width = '300px';
+                    img.style.height = '200px';
+                });
+                btn.innerHTML = '<i class="fas fa-th"></i> View All';
+                btn.classList.remove('bg-brand-500', 'text-white');
+                startAutoScroll(); // Restart wheel
+            }
+        }
+    </script>
+</body>
+</html>
